@@ -14,5 +14,10 @@ app.use(express.json());
 // 3. SET UP ROUTES
 app.use('/api', contactRoutes); 
 
+app.use((err, req, res, next) => {
+  console.error("SERVER ERROR:", err.stack); // This prints the real error to Render logs
+  res.status(500).json({ error: err.message });
+});
+
 const PORT = process.env.PORT || 10000; // Use 10000 for Render
 app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
