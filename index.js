@@ -8,7 +8,9 @@ dotenv.config();
 const app = express(); // 1. INITIALIZE APP FIRST
 
 // 2. NOW APPLY MIDDLEWARE
-app.use(cors()); 
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 app.use(express.json());
 
 // 3. SET UP ROUTES
