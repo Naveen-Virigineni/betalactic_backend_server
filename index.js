@@ -3,6 +3,12 @@ const dotenv = require('dotenv');
 const contactRoutes = require('./routes/contactRoutes'); // Import your route
 const cors = require('cors');
 
+app.use(cors({
+  origin: '*', 
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
+
 dotenv.config();
 const app = express();
 
