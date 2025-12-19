@@ -20,6 +20,10 @@ app.use(express.json());
 // ROUTES
 app.use('/api', contactRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Server is up and running!');
+});
+
 // ERROR HANDLER
 app.use((err, req, res, next) => {
   console.error("SERVER ERROR:", err.stack);
