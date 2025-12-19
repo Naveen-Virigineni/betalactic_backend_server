@@ -1,23 +1,30 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const contactRoutes = require('./routes/contactRoutes'); // Import your route
 const cors = require('cors');
+const contactRoutes = require('./routes/contactRoutes');
 
+// 1. Initialize environment variables first
+dotenv.config();
+
+// 2. Initialize the 'app' BEFORE using it
+const app = express();
+
+// 3. Configure Middleware in order
+// Enable CORS for all requests
 app.use(cors({
   origin: '*', 
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
 
-dotenv.config();
-const app = express();
-
-app.use(cors());
-// Middleware to read JSON data from the form
+// Middleware to parse incoming JSON data
 app.use(express.json());
 
-// Use the routes
+// 4. Set up Routes after middleware
 app.use('/api', contactRoutes); 
 
+// 5. Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
